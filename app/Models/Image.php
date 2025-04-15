@@ -27,13 +27,4 @@ class Image extends Model
             return unlink(public_path($this->gambar_produk));
         }
     }
-
-    protected $appends = ['url'];
-    public function getUrlAttribute()
-    {
-        if ($this->gambar_produk && file_exists(public_path($this->gambar_produk))) {
-            return asset($this->gambar_produk);
-    }
-        return null;
-    }
 }

@@ -4,12 +4,9 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\API\KategoriApiController;
-use App\Http\Controllers\Api\KeranjangController;
 use App\Http\Controllers\Api\ProdukApiController;
-use App\Http\Controllers\api\ProdukController;
 use App\Http\Controllers\Api\SubKategoriApiController;
 use App\Http\Controllers\Api\UserApiController;
-use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

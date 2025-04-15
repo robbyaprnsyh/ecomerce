@@ -55,7 +55,7 @@
                             @csrf
                             @php
                             $users = App\Models\User::findOrFail(auth()->user()->id);
-                            $users->status = 'tidak aktif';
+                            // $users->status = 'tidak aktif';
                             $users->save();
                             @endphp
                         </form>

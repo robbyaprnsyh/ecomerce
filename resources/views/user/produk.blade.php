@@ -154,7 +154,7 @@
                                         @if ($produk->image[1]->gambar_produk)
                                             <a href="#"><img src="{{ asset($produk->image[1]->gambar_produk) }}"
                                                     height="220px" alt="Checked Short Dress"></a>
-                                        @endif
+                                        @endif  
                                         @if ($produk->diskon > 0)
                                             <div class="sale-flash badge bg-secondary p-2">{{ $produk->diskon }}%</div>
                                         @endif

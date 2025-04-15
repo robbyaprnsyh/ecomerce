@@ -45,7 +45,7 @@ class ImageController extends Controller
                 $image->move('images/gambar_produk/', $name);
                 $images = new Image();
                 $images->produk_id = $request->produk_id;
-                $images->gambar_produk = 'images/gambar_produk/' . $name;
+                $images->gambar_produk =  $name;
                 $images->save();
             }
             return back()->with('success', 'Data has been added');

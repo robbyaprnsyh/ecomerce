@@ -16,7 +16,7 @@ class ProdukApiController extends Controller
 {
     public function index()
     {
-        $produks = Produk::with('kategori', 'subKategori', 'gambarProduk')->latest()->get();
+        $produks = Produk::with('kategori', 'subKategori', 'image')->latest()->get();
         return response()->json($produks);
     }
 
@@ -53,7 +53,7 @@ class ProdukApiController extends Controller
 
     public function show($id)
     {
-        $produk = Produk::with('images', 'ukuranProduk')->findOrFail($id);
+        $produk = Produk::with('image', 'ukuranProduk')->findOrFail($id);
         return response()->json($produk);
     }
 

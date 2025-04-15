@@ -31,7 +31,7 @@ class Produk extends Model
         return $this->belongsTo(SubKategori::class);
     }
 
-    public function gambarProduk()
+    public function image()
     {
         return $this->hasMany(Image::class);
     }

@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/ulasan/create', [App\Http\Controllers\frontend\ReviewController::class, 'store']);
     Route::resource('/alamat', App\Http\Controllers\frontend\AlamatController::class);
     Route::resource('/voucherSaya', App\Http\Controllers\frontend\VoucherUserController::class);
+    Route::get('/transaksi/payment/{id}', [App\Http\Controllers\frontend\TransaksiController::class, 'payment'])->name('transaksi.payment');
 });
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
@@ -99,6 +100,34 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 });
 Route::get('/getKota/{id}', [KotaController::class, 'getKota']);
 Route::get('/getKecamatan/{id}', [KecamatanController::class, 'getKecamatan']);
+
+
+
+Route::get('/gambar_produk/{filename}', function ($filename) {
+    $path = public_path('images/gambar_produk/' . $filename); 
+
+    if (! file_exists($path)) {
+        abort(404);
+    }
+
+    return response()->file($path, [
+        'Access-Control-Allow-Origin' => '*',
+    ]);
+});
+
+Route::get('/gambar_profile/{filename}', function ($filename) {
+    $path = public_path('images/users/' . $filename); 
+
+    if (! file_exists($path)) {
+        abort(404);
+    }
+
+    return response()->file($path, [
+        'Access-Control-Allow-Origin' => '*',
+    ]);
+});
+
+
 
 Auth::routes();
 
