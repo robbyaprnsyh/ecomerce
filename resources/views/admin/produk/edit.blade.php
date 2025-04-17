@@ -238,7 +238,7 @@
                                     <label class="form-label">Stok Produk</label>
                                     <input type="number" name="stok"
                                         class="form-control numbers mb-2  @error('stok') is-invalid @enderror"
-                                        placeholder="stok Produk" value="0" min="0" readonly>
+                                        placeholder="stok Produk" value="0" min="0">
                                     @error('stok')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -310,7 +310,7 @@
                         @foreach ($images as $image)
                             <div class="col-md-6 col-lg-6 mb-4">
                                 <div class="card h-100">
-                                    <img class="card-img-top" src="{{ asset($image->gambar_produk) }}"
+                                    <img class="card-img-top" src="{{ asset("images/gambar_produk/" . $image->gambar_produk) }}"
                                         alt="Card image cap" />
                                     <div class="card-body text-center">
                                         <form action="{{ route('image.destroy', $image->id) }}" method="post">

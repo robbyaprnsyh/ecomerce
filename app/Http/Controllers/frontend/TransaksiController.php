@@ -88,7 +88,7 @@ class TransaksiController extends Controller
         } else {
             $kode = '001';
         }
-        $transaksis->kode_transaksi = 'GNQ-' . date('dmy') . $kode;
+        $transaksis->kode_transaksi = 'SKO-' . date('dmy') . $kode;
         $transaksis->user_id = auth()->user()->id;
         $transaksis->alamat_id = $request->alamat_id;
         $transaksis->voucher_id = $request->voucher_id;

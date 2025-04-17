@@ -1,423 +1,10 @@
 @extends('user.layouts.users')
 
 @section('content')
-    {{-- Male --}}
-    <!-- Shop Details Section Begin -->
-    {{-- <section class="shop-details">
-    <div class="product__details__pic">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="product__details__breadcrumb">
-                        <a href="/">Home</a>
-                        <a href="/produk">produk</a>
-                        <span>Detail Produk</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2">
-                    <ul class="nav nav-tabs" style="max-height:400px; width:140px; overflow:auto" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs{{ $images[0]->id }}" role="tab">
-                                <div class="product__thumb__pic set-bg"
-                                    data-setbg="{{ asset($images[0]->gambar_produk) }}">
-                                </div>
-                            </a>
-                        </li>
-                        @foreach ($images->skip(1) as $image)
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs{{ $image->id }}" role="tab">
-                                <div class="product__thumb__pic set-bg" data-setbg="{{ asset($image->gambar_produk) }}">
-                                </div>
-                            </a>
-                        </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-9">
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tabs{{ $images[0]->id }}" role="tabpanel">
-                            <div class="product__details__pic__item">
-                                <img src="{{ asset($images[0]->gambar_produk) }}" alt="">
-                            </div>
-                        </div>
-                        @foreach ($images->skip(1) as $image)
-                        <div class="tab-pane" id="tabs{{ $image->id }}" role="tabpanel">
-                            <div class="product__details__pic__item">
-                                <img src="{{ asset($image->gambar_produk) }}" alt="">
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="product__details__content">
-                        <div class="container-fluid">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-lg-10 card w-100 p-5 rounded shadow">
-                                    <div class="product__details__text">
-                                        <h4>{{ $produks->nama_produk }}</h4>
-                                        @if ($produks->diskon > 0)
-                                        @php
-                                        $diskon = ($produks->diskon / 100) * $produks->harga;
-                                        $harga = $produks->harga - $diskon;
-                                        @endphp
-                                        <h3>Rp.{{ number_format($harga, 0, ',', '.') }}<span>{{
-                                                number_format($produks->harga, 0, ',', '.') }}</span>
-                                        </h3>
-                                        @else
-                                        <h3>Rp.{{ number_format($produks->harga, 0, ',', '.') }}</h3>
-                                        @endif
-                                        <p style="text-align: justify; max-height:400px; overflow:auto">
-                                            {!! $produks->deskripsi !!}</p>
-                                        <form id="tambahKeranjang" action="{{ route('keranjang.store') }}"
-                                            method="POST">
-                                            @csrf
-                                            <input type="hidden" name="produk_id" value="{{ $produks->id }}">
-                                            <div class="product__details__option">
-                                                <div class="product__details__option__size">
-                                                    <span>Size:</span>
-                                                    <label for="xl">xl
-                                                        <input type="radio" name="ukuran" value="xl">
-                                                    </label>
-                                                    <label for="l">l
-                                                        <input type="radio" name="ukuran" value="l">
-                                                    </label>
-                                                    <label for="m">M
-                                                        <input type="radio" name="ukuran" value="m">
-                                                    </label>
-                                                    <label for="sm">s
-                                                        <input type="radio" name="ukuran" value="s">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="product__details__cart__option">
-                                                <div class="quantity">
-                                                    <div class="pro-qty">
-                                                        <input type="number" name="jumlah" min="1"
-                                                            max="{{ $produks->stok }}" value="1">
-                                                    </div>
-                                                </div>
-                                                <div class="primary-btn">
-                                                    <a onclick="event.preventDefault();
-                                                        document.getElementById('tambahKeranjang').submit();">
-                                                        add to cart
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @if (count($review_produks))
-    <div class="row">
-        <div class="container-fluid">
-            <h3 class="related-title">Ulasan</h3>
-            @foreach ($review_produks as $review_produk)
-            <div class="col-lg-9 p-0">
-                <div class="testimonial__text">
-                    <div class="testimonial__author">
-                        <div class="testimonial__author__pic">
-                            <img src="{{ asset($review_produk->user->profile) }}" alt="">
-                        </div>
-                        <div class="testimonial__author__text">
-                            <h5>{{ $review_produk->user->name }}</h5>
-                            <p class="text-break">{{ $review_produk->komen }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-            <div class="text-center">
-                <a href="/ulasan/{{ $produks->id }}" class="primary-btn">Semua Ulasan</a>
-            </div>
-        </div>
-    </div>
-    @endif
-</section> --}}
-    <!-- Shop Details Section End -->
-
-    <!-- Related Section Begin -->
-    {{-- <section class="related spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h3 class="related-title">Produk Lainnya</h3>
-            </div>
-        </div>
-        <div class="row">
-            @foreach ($produk_lainnya as $produk)
-            <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                <div class="product__item sale">
-                    <div class="product__item__pic set-bg" data-setbg="{{ asset($produk->image[0]->gambar_produk) }}">
-                        @if ($produk->diskon > 0)
-                        <span class="label">{{ $produk->diskon }}%</span>
-                        @endif
-                        <ul class="product__hover">
-                            <li><a href="#"><img src="{{ asset('assets2/img/icon/heart.png') }}" alt=""></a></li>
-                            <li><a href="/produk/{{ $produk->id }}"><img
-                                        src="{{ asset('assets2/img/icon/search.png') }}" alt=""></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6>Piqué Biker Jacket</h6>
-                        @if ($produk->diskon > 0)
-                        @php
-                        $diskon = ($produk->diskon / 100) * $produk->harga;
-                        $harga = $produk->harga - $diskon;
-                        @endphp
-                        <p>Rp.
-                            {{ number_format($harga, 0, ',', '.') }}<span class="diskon">{{
-                                number_format($produk->harga, 0, ',', '.') }}</span>
-                        </p>
-                        @else
-                        <p>Rp. {{ number_format($produk->harga, 0, ',', '.') }}</p>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section> --}}
-    <!-- Related Section End -->
-    {{-- EndMale --}}
-
-    {{-- Canvas --}}
-
-    {{-- <div class="container clearfix">
-
-    <div class="single-product">
-        <div class="product">
-            <div class="row gutter-40">
-
-                <div class="col-md-4">
-
-                    <!-- Product Single - Gallery
-									============================================= -->
-                    <div class="product-image">
-                        <div class="fslider" data-pagi="false" data-arrows="false" data-thumbs="true">
-                            <div class="flexslider">
-                                <div class="slider-wrap" data-lightbox="gallery">
-                                    @foreach ($images as $image)
-                                    <div class="slide" data-thumb="{{asset($image->gambar_produk)}}"><img
-                                            src="{{asset($image->gambar_produk)}}" alt="Pink Printed Dress"></a>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                        @if ($produks->diskon > 0)
-                        <div class="sale-flash badge bg-secondary p-2">{{ $produks->diskon }}%</div>
-                        @endif
-                    </div><!-- Product Single - Gallery End -->
-
-                </div>
-
-                <div class="col-md-5 product-desc">
-
-                    <div class="d-flex align-items-center justify-content-between">
-
-                        <!-- Product Single - Price
-										============================================= -->
-                        <div class="product-price"><del>$39.99</del> <ins>$24.99</ins></div>
-                        <!-- Product Single - Price End -->
-
-                        <!-- Product Single - Rating
-										============================================= -->
-                        <div class="product-rating">
-                            <i class="icon-star3"></i>
-                            <i class="icon-star3"></i>
-                            <i class="icon-star3"></i>
-                            <i class="icon-star-half-full"></i>
-                            <i class="icon-star-empty"></i>
-                        </div><!-- Product Single - Rating End -->
-
-                    </div>
-
-                    <div class="line"></div>
-
-                    <!-- Product Single - Quantity & Cart Button
-									============================================= -->
-                    <form class="cart mb-0 d-flex justify-content-between align-items-center" method="post"
-                        enctype='multipart/form-data'>
-                        <div class="quantity clearfix">
-                            <div class="flex-wrap mx-2">
-                                @foreach ($ukuranProduks as $ukuranProduk)
-                                <input type="radio" class="btn-check required mx-2" name="ukuran_id"
-                                    id="{{ $ukuranProduk->id }}" autocomplete="off" value="Corporate">
-                                <label for="{{ $ukuranProduk->id }}"
-                                    class="btn btn-outline-secondary px-3 fw-semibold ls0 nott">{{
-                                    $ukuranProduk->ukuran->ukuran }}</label>
-                                @endforeach
-                            </div>
-                            <input type="button" value="-" class="minus">
-                            <input type="number" step="1" min="1" name="quantity" max="{{ $produks->stok }}" value="1"
-                                title="Qty" class="qty" />
-                            <input type="button" value="+" class="plus">
-                        </div>
-                        <button type="submit" class="add-to-cart button m-0">Add to cart</button>
-                    </form><!-- Product Single - Quantity & Cart Button End -->
-
-                    <div class="line"></div>
-
-                    <!-- Product Single - Short Description
-									============================================= -->
-                    <p>{!! $produks->deskripsi !!}</p>
-
-                    <!-- Product Single - Meta
-									============================================= -->
-                    <div class="card product-meta">
-                        <div class="card-body">
-                            <span class="posted_in">Kategori: <a href="#" rel="tag">{{ $produks->kategori->name
-                                    }}</a>.</span>
-                            <span class="tagged_as">Sub Kategori: <a href="#" rel="tag">{{ $produks->subKategori->name
-                                    }}</a>.</span>
-                        </div>
-                    </div><!-- Product Single - Meta End -->
-
-                </div>
-
-                <div class="col-12 mt-5">
-
-                    <div class="tabs clearfix mb-0" id="tab-1">
-
-                        <ul class="tab-nav clearfix">
-                            <li><a href="#tabs-2"><i class="icon-info-sign"></i><span class="d-none d-md-inline-block">
-                                        Additional Information</span></a></li>
-                            <li><a href="#tabs-3"><i class="icon-star3"></i><span class="d-none d-md-inline-block">
-                                        Reviews (2)</span></a></li>
-                        </ul>
-
-                        <div class="tab-container">
-                            <div class="tab-content clearfix" id="tabs-2">
-
-                                <table class="table table-striped table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <td>Size</td>
-                                            <td>Small, Medium &amp; Large</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Color</td>
-                                            <td>Pink &amp; White</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                            <div class="tab-content clearfix" id="tabs-3">
-
-                                <div id="reviews" class="clearfix">
-
-                                    <ol class="commentlist clearfix">
-
-                                        <li class="comment even thread-even depth-1" id="li-comment-1">
-                                            <div id="comment-1" class="comment-wrap clearfix">
-
-                                                <div class="comment-meta">
-                                                    <div class="comment-author vcard">
-                                                        <span class="comment-avatar clearfix">
-                                                            <img alt='Image'
-                                                                src='https://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=60'
-                                                                height='60' width='60' /></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="comment-content clearfix">
-                                                    <div class="comment-author">John Doe<span><a href="#"
-                                                                title="Permalink to this comment">April 24, 2021 at
-                                                                10:46AM</a></span></div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo
-                                                        perferendis aliquid tenetur. Aliquid, tempora, sit aliquam
-                                                        officiis nihil autem eum at repellendus facilis quaerat
-                                                        consequatur commodi laborum saepe non nemo nam maxime quis error
-                                                        tempore possimus est quasi reprehenderit fuga!</p>
-                                                    <div class="review-comment-ratings">
-                                                        <i class="icon-star3"></i>
-                                                        <i class="icon-star3"></i>
-                                                        <i class="icon-star3"></i>
-                                                        <i class="icon-star3"></i>
-                                                        <i class="icon-star-half-full"></i>
-                                                    </div>
-                                                </div>
-
-                                                <div class="clear"></div>
-
-                                            </div>
-                                        </li>
-
-                                        <li class="comment even thread-even depth-1" id="li-comment-2">
-                                            <div id="comment-2" class="comment-wrap clearfix">
-
-                                                <div class="comment-meta">
-                                                    <div class="comment-author vcard">
-                                                        <span class="comment-avatar clearfix">
-                                                            <img alt='Image'
-                                                                src='https://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=60'
-                                                                height='60' width='60' /></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="comment-content clearfix">
-                                                    <div class="comment-author">Mary Jane<span><a href="#"
-                                                                title="Permalink to this comment">June 16, 2021 at
-                                                                6:00PM</a></span></div>
-                                                    <p>Quasi, blanditiis, neque ipsum numquam odit asperiores hic dolor
-                                                        necessitatibus libero sequi amet voluptatibus ipsam velit qui
-                                                        harum temporibus cum nemo iste aperiam explicabo fuga odio
-                                                        ratione sint fugiat consequuntur vitae adipisci delectus eum
-                                                        incidunt possimus tenetur excepturi at accusantium quod
-                                                        doloremque reprehenderit aut expedita labore error atque?</p>
-                                                    <div class="review-comment-ratings">
-                                                        <i class="icon-star3"></i>
-                                                        <i class="icon-star3"></i>
-                                                        <i class="icon-star3"></i>
-                                                        <i class="icon-star-empty"></i>
-                                                        <i class="icon-star-empty"></i>
-                                                    </div>
-                                                </div>
-
-                                                <div class="clear"></div>
-
-                                            </div>
-                                        </li>
-
-                                    </ol>
-
-                                    <!-- Modal Reviews
-													============================================= -->
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#reviewFormModal"
-                                        class="button button-3d m-0 float-end">Add a Review</a>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-</div> --}}
-
     <div class="container clearfix">
-
         <div class="single-product">
             <div class="product">
                 <div class="row gutter-40">
-
                     <div class="col-md-4">
                         <!-- Product Single - Gallery ============================================= -->
                         <div class="product-image">
@@ -425,10 +12,10 @@
                                 <div class="flexslider">
                                     <div class="slider-wrap" data-lightbox="gallery">
                                         @foreach ($images as $image)
-                                            <div class="slide" data-thumb="{{ asset($image->gambar_produk) }}"><a
-                                                    href="{{ asset($image->gambar_produk) }}" title="{{ $produks->name }}"
+                                            <div class="slide" data-thumb="{{ asset("images/gambar_produk/" . $image->gambar_produk) }}"><a
+                                                    href="{{ asset("images/gambar_produk/" . $image->gambar_produk) }}" title="{{ $produks->name }}"
                                                     data-lightbox="gallery-item"><img
-                                                        src="{{ asset($image->gambar_produk) }}"
+                                                        src="{{ asset("images/gambar_produk/" . $image->gambar_produk) }}"
                                                         alt="{{ $produks->name }}"></a>
                                             </div>
                                         @endforeach
@@ -469,7 +56,7 @@
                             <!-- Product Single - Price End -->
 
                             <!-- Product Single - Rating
-                                                                                                                        ============================================= -->
+                                                                                                                            ============================================= -->
                             @php
                                 if ($jumlah_rating > 0) {
                                     $rating = number_format($produks->reviewProduk->sum('rating'));
@@ -493,7 +80,7 @@
                         <div class="line"></div>
 
                         <!-- Product Single - Short Description
-                                                                                                                        ============================================= -->
+                                                                                                                            ============================================= -->
                         <p>{!! $produks->deskripsi !!}</p>
                         <div class="line"></div>
                         <ul class="iconlist">
@@ -554,7 +141,7 @@
                                             <div class="col-auto mx-2">
                                                 <div class="entry-image">
                                                     <a href="#"><img
-                                                            src="{{ asset($produk->image[0]->gambar_produk) }}"
+                                                            src="{{ asset("images/gambar_produk/" . $produk->image[0]->gambar_produk) }}"
                                                             alt="Image"></a>
                                                 </div>
                                             </div>
@@ -580,7 +167,9 @@
                                                         @php
                                                             $jumlah_rating = $produk->reviewProduk->count();
                                                             if ($jumlah_rating > 0) {
-                                                                $rating = number_format($produk->reviewProduk->sum('rating'));
+                                                                $rating = number_format(
+                                                                    $produk->reviewProduk->sum('rating'),
+                                                                );
                                                                 $total = $rating / $jumlah_rating;
                                                             } else {
                                                                 $total = 0;

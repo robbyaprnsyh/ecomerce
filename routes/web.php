@@ -66,7 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/ulasan/create', [App\Http\Controllers\frontend\ReviewController::class, 'store']);
     Route::resource('/alamat', App\Http\Controllers\frontend\AlamatController::class);
     Route::resource('/voucherSaya', App\Http\Controllers\frontend\VoucherUserController::class);
-    Route::get('/transaksi/payment/{id}', [App\Http\Controllers\frontend\TransaksiController::class, 'payment'])->name('transaksi.payment');
+    Route::get('/transaksi/payment/{id}', [App\Http\Controllers\frontend\TransaksiController::class, 'payment'])->name('transaksis.payment');
+    Route::post('/get-snap-token', [App\Http\Controllers\TransaksiController::class, 'getSnapToken'])->name('snap.token');
 });
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {

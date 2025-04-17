@@ -32,7 +32,7 @@
 
             <div class="col-md-9">
 
-                <img src="{{ asset($users->profile) }}" class="alignleft img-circle img-thumbnail my-0" alt="Avatar"
+                <img src="{{ asset("images/users/" . $users->profile) }}" class="alignleft img-circle img-thumbnail my-0" alt="Avatar"
                     style="max-width: 84px;">
 
                 <div class="heading-block border-0">

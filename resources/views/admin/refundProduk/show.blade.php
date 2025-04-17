@@ -65,7 +65,7 @@
                 <div class="row g-0">
                     <div class="col-md-4 my-3 ms-3">
                         <img class="d-block w-100"
-                            src="{{ asset($refund_produks->transaksi->keranjang->produk->gambar_produk1) }}" alt="gambar" />
+                            src="{{ asset("images/gambar_produk/" . $refund_produks->transaksi->keranjang->produk->gambar_produk1) }}" alt="gambar" />
                     </div>
                     <div class="col-md-7">
                         <div class="card-header">

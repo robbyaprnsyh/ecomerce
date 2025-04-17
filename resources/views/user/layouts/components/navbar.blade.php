@@ -36,7 +36,7 @@
                                             <div class="top-wishlist-item">
                                                 <div class="top-wishlist-item-image">
                                                     <a href="/produk/{{ $wishlist->produk_id }}"><img
-                                                            src="{{ asset($wishlist->produk->image[0]->gambar_produk) }}"
+                                                            src="{{ asset("images/gambar_produk/" . $wishlist->produk->image[0]->gambar_produk) }}"
                                                             alt="{{ $wishlist->produk->nama_produk }}" /></a>
                                                 </div>
                                                 <div class="top-wishlist-item-desc">
@@ -98,7 +98,7 @@
                                             <div class="top-cart-item">
                                                 <div class="top-cart-item-image">
                                                     <a href="/produk/{{ $keranjang->produk_id }}"><img
-                                                            src="{{ asset($keranjang->produk->image[0]->gambar_produk) }}"
+                                                            src="{{ asset("images/gambar_produk/" . $keranjang->produk->image[0]->gambar_produk) }}"
                                                             alt="{{ $keranjang->produk->nama_produk }}" /></a>
                                                 </div>
                                                 <div class="top-cart-item-desc">

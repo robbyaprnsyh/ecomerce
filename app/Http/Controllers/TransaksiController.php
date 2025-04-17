@@ -57,132 +57,103 @@ class TransaksiController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input
+        //validasi
         $validated = $request->validate([
-            'user_id'             => 'required',
+            'user_id' => 'required',
             'metodePembayaran_id' => 'required',
-            'alamat_id'           => 'required',
+            'alamat_id' => 'required',
         ]);
 
-        // Membuat transaksi baru
-        $transaksis      = new Transaksi();
+        $transaksis = new Transaksi();
         $kode_transaksis = DB::table('transaksis')->select(DB::raw('MAX(RIGHT(kode_transaksi,3)) as kode'));
-        $kode            = $kode_transaksis->count() > 0 ? sprintf('%03s', ((int) $kode_transaksis->first()->kode) + 1) : '001';
-
-        // Menyimpan data transaksi
-        $transaksis->kode_transaksi      = 'SKO-' . date('dmy') . $kode;
-        $transaksis->user_id             = $request->user_id;
-        $transaksis->alamat_id           = $request->alamat_id;
-        $transaksis->voucher_id          = $request->voucher_id ?? null; // pastikan voucher_id tidak null
+        if ($kode_transaksis->count() > 0) {
+            foreach ($kode_transaksis->get() as $kode_transaksi) {
+                $x = ((int) $kode_transaksi->kode) + 1;
+                $kode = sprintf('%03s', $x);
+            }
+        } else {
+            $kode = '001';
+        }
+        $transaksis->kode_transaksi = 'SKO-' . date('dmy') . $kode;
+        $transaksis->user_id = $request->user_id;
+        $transaksis->alamat_id = $request->alamat_id;
+        $transaksis->voucher_id = $request->voucher_id;
         $transaksis->metodePembayaran_id = $request->metodePembayaran_id;
         $transaksis->save();
 
-        // Proses detail transaksi
         foreach ($request->keranjang_id as $keranjang) {
-            $detailTransaksi               = new DetailTransaksi();
+            $detailTransaksi = new DetailTransaksi();
             $detailTransaksi->transaksi_id = $transaksis->id;
-            $detailTransaksi->user_id      = $transaksis->user_id;
+            $detailTransaksi->user_id = $transaksis->user_id;
             $detailTransaksi->keranjang_id = $keranjang;
             $detailTransaksi->save();
 
             $keranjangs = Keranjang::where('id', $detailTransaksi->keranjang_id)->get();
-            foreach ($keranjangs as $keranjangItem) {
-                $produk = Produk::where('id', $keranjangItem->produk_id)->first();
-                if ($produk->stok < $keranjangItem->jumlah) {
-                    // Jika stok kurang, transaksi dibatalkan
+            foreach ($keranjangs as $keranjang) {
+                $produks = Produk::where('id', $keranjang->produk_id)->first();
+                if ($produks->stok < $keranjang->jumlah) {
+                    $transaksis = Transaksi::where('id', $transaksis->id)->first();
                     $transaksis->delete();
                     return redirect()->route('transaksi.create')->with('error', 'Stok Kurang');
+                } else {
+                    $keranjang->status = 'checkout';
+                    $keranjang->save();
+                    $produks->stok -= $keranjang->jumlah;
                 }
-                $keranjangItem->status = 'checkout';
-                $keranjangItem->save();
-                $produk->stok -= $keranjangItem->jumlah;
-                $produk->save();
+                $produks->save();
 
-                // Catat riwayat produk yang terjual
-                $riwayat            = new RiwayatProduk();
-                $riwayat->produk_id = $produk->id;
-                $riwayat->type      = 'keluar';
-                $riwayat->qty       = $keranjangItem->jumlah;
-                $riwayat->note      = 'Barang terjual';
-                $riwayat->save();
+                $riwayatProduks = new RiwayatProduk();
+                $riwayatProduks->produk_id = $produks->id;
+                $riwayatProduks->type = 'keluar';
+                $riwayatProduks->qty = $keranjang->jumlah;
+                $riwayatProduks->note = 'Barang terjual';
+                $riwayatProduks->save();
+
             }
         }
 
-        // Hitung total harga
-        $total_harga = DetailTransaksi::join('keranjangs', 'detail_transaksis.keranjang_id', '=', 'keranjangs.id')
-            ->where('detail_transaksis.transaksi_id', $transaksis->id)
-            ->sum("keranjangs.total_harga");
+        $total_harga = DetailTransaksi::join('keranjangs', 'detail_transaksis.keranjang_id', '=', 'keranjangs.id')->
+            where('detail_transaksis.transaksi_id', $transaksis->id)->
+            sum("keranjangs.total_harga");
 
-        // Hitung diskon jika voucher ada
-        $diskon      = $transaksis->voucher_id ? ($transaksis->voucher->diskon / 100) * $total_harga : 0;
+        if ($transaksis->voucher_id == '') {
+            $diskon = 0;
+        } else {
+            $diskon = ($transaksis->voucher->diskon / 100) * $total_harga;
+        }
         $total_bayar = $total_harga - $diskon;
 
-        // Cek metode pembayaran dan pengguna
-        $metode = MetodePembayaran::find($transaksis->metodePembayaran_id);
-        $user   = User::findOrFail($transaksis->user_id);
-
-        // Proses pembayaran dengan SUKO WALLET
-        if ($metode->metodePembayaran == 'SUKO WALLET') {
-            if ($user->saldo >= $total_bayar) {
-                $user->saldo -= $total_bayar;
+        // saldo
+        $metodePembayarans = MetodePembayaran::where('id', $transaksis->metodePembayaran_id)->first();
+        $users = User::findOrFail($transaksis->user_id);
+        if ($metodePembayarans->metodePembayaran == 'SUKO WALLET') {
+            if ($users->saldo > $total_bayar) {
+                $users->saldo -= $total_bayar;
             } else {
-                // Jika saldo tidak cukup, batalkan transaksi
+                $transaksis = Transaksi::where('id', $transaksis->id)->first();
                 $transaksis->delete();
                 return redirect()->route('transaksi.create')->with('error', 'Saldo Kurang');
             }
         }
 
-        // Simpan total harga transaksi
-        $transaksis->total_harga = $total_bayar;
+        $transaksis->findOrFail($transaksis->id);
+        $transaksis->total_harga += $total_bayar;
         $transaksis->save();
 
-        // Update poin pengguna
-        if ($total_harga >= 250000) {
-            $user->point += 25000;
-        } elseif ($total_harga >= 200000) {
-            $user->point += 25000;
+        if ($total_harga >= 100000) {
+            $users->point += 10000;
         } elseif ($total_harga >= 150000) {
-            $user->point += 10000;
-        } elseif ($total_harga >= 100000) {
-            $user->point += 10000;
+            $users->point += 10000;
+        } elseif ($total_harga >= 200000) {
+            $users->point += 25000;
+        } elseif ($total_harga >= 250000) {
+            $users->point += 25000;
         }
-        $user->save();
+        $users->save();
 
-        // Proses pembayaran dengan Midtrans (jika bukan SUKO WALLET)
-        if ($metode->metodePembayaran != 'SUKO WALLET') {
-            // Konfigurasi Midtrans
-            Config::$serverKey    = config('midtrans.server_key');
-            Config::$isProduction = config('midtrans.is_production');
-            Config::$isSanitized  = config('midtrans.sanitized');
-            Config::$is3ds        = config('midtrans.3ds');
-
-            // Persiapkan parameter transaksi
-            $params = [
-                'transaction_details' => [
-                    'order_id'     => $transaksis->kode_transaksi,
-                    'gross_amount' => $total_bayar,
-                ],
-                'customer_details'    => [
-                    'first_name' => $user->name,
-                    'email'      => $user->email,
-                    'phone'      => $user->telepon ?? '081234567890',
-                ],
-                'enabled_payments'    => ['gopay', 'bank_transfer', 'bca_va', 'permata_va'],
-            ];
-
-            // Mendapatkan snap token dari Midtrans
-            $snapToken = Snap::getSnapToken($params);
-
-            // Simpan snap_token di transaksi
-            $transaksis->snap_token = $snapToken;
-            $transaksis->save();
-
-            // Arahkan ke halaman pembayaran
-            return redirect()->route('transaksi.payment', ['id' => $transaksis->id]);
-        }
-
-        // Jika pembayaran menggunakan SUKO WALLET atau pembayaran selesai
-        // return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil diproses.');
+        return redirect()
+            ->route('transaksi.index')
+            ->with('success', 'Data has been added');
     }
 
     /**

@@ -13,7 +13,7 @@
                         <div class="testimonial__text">
                             <div class="testimonial__author">
                                 <div class="testimonial__author__pic">
-                                    <img src="{{ asset($refund->keranjang->produk->image[0]->gambar_produk) }}" alt="">
+                                    <img src="{{ asset("images/gambar_produk/" . $refund->keranjang->produk->image[0]->gambar_produk) }}" alt="">
                                 </div>
                                 <div class="testimonial__author__text">
                                     <h5>{{ $refund->transaksi->kode_transaksi }}</h5>

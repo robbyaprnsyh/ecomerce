@@ -78,7 +78,7 @@
         </div>
     </div>
 
-    {{-- <div class="row mb-3">
+    <div class="row mb-3">
         <div class="col-xl-8">
             <div class="card">
                 <div class="row row-bordered g-0">
@@ -141,7 +141,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

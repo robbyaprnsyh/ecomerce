@@ -20,7 +20,7 @@
                             <div class="promo promo-light promo-full">
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <img src="{{ asset($pesanan->keranjang->produk->image[0]->gambar_produk) }}"
+                                        <img src="{{ asset("images/gambar_produk/" . $pesanan->keranjang->produk->image[0]->gambar_produk) }}"
                                             width="150px" height="140px" alt="" srcset="">
                                     </div>
                                     <div class="col-lg-9">
@@ -254,7 +254,7 @@
                             <div class="promo promo-light promo-full">
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <img src="{{ asset($pesanan->keranjang->produk->image[0]->gambar_produk) }}"
+                                        <img src="{{ asset("images/gambar_produk/" . $pesanan->keranjang->produk->image[0]->gambar_produk) }}"
                                             width="150px" height="140px" alt="" srcset="">
                                     </div>
                                     <div class="col-lg-9">
@@ -345,7 +345,7 @@
                             <div class="promo promo-light promo-full">
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <img src="{{ asset($pesanan->keranjang->produk->image[0]->gambar_produk) }}"
+                                        <img src="{{ asset("images/gambar_produk/" . $pesanan->keranjang->produk->image[0]->gambar_produk) }}"
                                             width="150px" height="140px" alt="" srcset="">
                                     </div>
                                     <div class="col-lg-9">
@@ -570,7 +570,7 @@
                             <div class="promo promo-light promo-full">
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <img src="{{ asset($pesanan->keranjang->produk->image[0]->gambar_produk) }}"
+                                        <img src="{{ asset("images/gambar_produk/" . $pesanan->keranjang->produk->image[0]->gambar_produk) }}"
                                             width="150px" height="140px" alt="" srcset="">
                                     </div>
                                     <div class="col-lg-9">
@@ -619,7 +619,7 @@
                             <div class="promo promo-light promo-full">
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <img src="{{ asset($pesanan->keranjang->produk->image[0]->gambar_produk) }}"
+                                        <img src="{{ asset("images/gambar_produk/" . $pesanan->keranjang->produk->image[0]->gambar_produk) }}"
                                             width="150px" height="140px" alt="" srcset="">
                                     </div>
                                     <div class="col-lg-9">

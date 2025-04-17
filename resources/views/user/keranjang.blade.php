@@ -53,7 +53,7 @@
                                                 <div class="col-4">
                                                     <a href="/detailProduk/{{ $keranjang->produk_id }}"><img width="64"
                                                             height="64"
-                                                            src="{{ asset($keranjang->produk->image[0]->gambar_produk) }}"
+                                                            src="{{ asset("images/gambar_produk/" . $keranjang->produk->image[0]->gambar_produk) }}"
                                                             alt="{{ $keranjang->produk->nama_produk }}"></a>
                                                 </div>
                                                 <div class="col mt-2 ">

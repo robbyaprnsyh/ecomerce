@@ -21,7 +21,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg"
-                                    data-setbg="{{ asset($produk->image[0]->gambar_produk) }}">
+                                    data-setbg="{{ asset("images/gambar_produk/" . $produk->image[0]->gambar_produk) }}">
                                     @if ($produk->diskon > 0)
                                         <div class="label sale float-end">-{{ $produk->diskon }}%</div>
                                     @endif

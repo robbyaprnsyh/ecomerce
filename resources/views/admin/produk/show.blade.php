@@ -113,7 +113,7 @@
                     @foreach ($images as $image)
                     <div class="col-md-6 col-lg-6 mb-4">
                         <div class="card h-100">
-                            <img class="card-img-top" src="{{ asset($image->gambar_produk) }}" alt="Card image cap" />
+                            <img class="card-img-top" src="{{ asset("images/gambar_produk/" . $image->gambar_produk) }}" alt="Card image cap" />
                         </div>
                     </div>
                     @endforeach

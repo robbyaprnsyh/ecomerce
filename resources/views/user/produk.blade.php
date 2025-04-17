@@ -136,7 +136,7 @@
 
         <div class="row gutter-40 col-mb-80">
             <!-- Post Content
-                                                                                                                                ============================================= -->
+                                                                                                                                    ============================================= -->
             <div class="postcontent col-lg-9 order-lg-last">
 
                 <!-- Shop ============================================= -->
@@ -148,13 +148,15 @@
                                 <div class="grid-inner">
                                     <div class="product-image">
                                         @if ($produk->image[0]->gambar_produk)
-                                            <a href="#"><img src="{{ asset($produk->image[0]->gambar_produk) }}"
+                                            <a href="#"><img
+                                                    src="{{ asset('images/gambar_produk/' . $produk->image[0]->gambar_produk) }}"
                                                     height="220px" class="rounded" alt="Checked Short Dress"></a>
                                         @endif
                                         @if ($produk->image[1]->gambar_produk)
-                                            <a href="#"><img src="{{ asset($produk->image[1]->gambar_produk) }}"
+                                            <a href="#"><img
+                                                    src="{{ asset('images/gambar_produk/' . $produk->image[1]->gambar_produk) }}"
                                                     height="220px" alt="Checked Short Dress"></a>
-                                        @endif  
+                                        @endif
                                         @if ($produk->diskon > 0)
                                             <div class="sale-flash badge bg-secondary p-2">{{ $produk->diskon }}%</div>
                                         @endif
@@ -297,6 +299,9 @@
                                 <li><a href="/produk?min=150000&max=200000">Rp. 150.000 - 200.000</a></li>
                                 <li><a href="/produk?min=200000&max=250000">Rp. 200.000 - 250.000</a></li>
                                 <li><a href="/produk?min=250000&max=300000">Rp. 250.000 - 300.000</a></li>
+                                <li><a href="/produk?min=300000&max=350000">Rp. 300.000 - 350.000</a></li>
+                                <li><a href="/produk?min=350000&max=400000">Rp. 350.000 - 400.000</a></li>
+                                <li><a href="/produk?min=400000&max=450000">Rp. 400.000 - 450.000</a></li>
                             </ul>
                         </div>
 

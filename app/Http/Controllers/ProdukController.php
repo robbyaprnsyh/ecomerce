@@ -75,7 +75,7 @@ class ProdukController extends Controller
                 $image->move('images/gambar_produk/', $name);
                 $images = new Image();
                 $images->produk_id = $produks->id;
-                $images->gambar_produk = 'images/gambar_produk/' . $name;
+                $images->gambar_produk = $name;
                 $images->save();
             }
         }

@@ -168,7 +168,7 @@ class UserController extends Controller
             $image = $request->file('profile');
             $name  = rand(1000, 9999) . $image->getClientOriginalName();
             $image->move(public_path('images/users/'), $name);
-            $users->profile = $name; // Simpan hanya nama file ke database
+            $users->profile = $name; 
         }
 
         $users->save();

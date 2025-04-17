@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             // KotaSeeder::class,
             // kecamatanSeeder::class,
             MetodePembayaranSeeder::class,
+            UkuranSeeder::class,
         ]);
 
     }

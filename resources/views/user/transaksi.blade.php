@@ -1,96 +1,6 @@
 @extends('user.layouts.users')
 
 @section('content')
-    {{-- Male --}}
-    {{--
-<!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-option">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="breadcrumb__text">
-                    <h4>Check Out</h4>
-                    <div class="breadcrumb__links">
-                        <a href="./index.html">Home</a>
-                        <a href="./shop.html">Shop</a>
-                        <span>Check Out</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Breadcrumb Section End -->
-
-<!-- Checkout Section Begin -->
-<section class="checkout spad">
-    <div class="container">
-        <div class="checkout__form">
-            <form action="{{ route('checkout.store') }}" method="POST">
-                @csrf
-                <div class="row">
-                    <div class="col-lg-12 col-md-6">
-                        <div class="checkout__order">
-                            <h4 class="order__title">Your order</h4>
-                            <div class="checkout__order__products">Product <span>Total</span></div>
-                            <ul class="checkout__total__products">
-                                @foreach ($keranjangs as $keranjang)
-                                <li>{{ $keranjang->produk->nama_produk }}
-                                    ({{ $keranjang->ukuran }})
-                                    / {{ $keranjang->jumlah }}<span>Rp.
-                                        {{ number_format($keranjang->total_harga, 0, ',', '.') }} </span>
-                                </li>
-                                <input type="hidden" name="keranjang_id[]" value="{{ $keranjang->id }}">
-                                @endforeach
-                            </ul>
-                            <ul class="checkout__total__all">
-                                <li>Total <span>Rp.
-                                        {{ number_format($total_harga, 0, ',', '.') }}</span></li>
-                            </ul>
-                            <div class="mb-3">
-                                <select name="alamat_id" class="form-select @error('alamat_id') is-invalid @enderror">
-                                    @foreach ($alamats as $alamat)
-                                    <option value="" hidden>Pilih Alamat</option>
-                                    <option value="{{ $alamat->id }}">{{ $alamat->nama_lengkap }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                                @error('alamat_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <select name="metodePembayaran_id"
-                                    class="form-control @error('metodePembayaran_id') is-invalid @enderror">
-                                    <option value="" hidden>Pilih Metode Pembayaran</option>
-                                    @foreach ($metodePembayarans as $metodePembayaran)
-                                    <option value="{{ $metodePembayaran->id }}">
-                                        {{ $metodePembayaran->metodePembayaran }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                                @error('metodePembayaran_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <button type="submit" class="site-btn">PLACE ORDER</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</section>
-<!-- Checkout Section End --> --}}
-
-    {{-- EndMale --}}
-
-    {{-- Canvas --}}
-
     <div class="container clearfix">
         <form action="{{ route('checkout.store') }}" id="checkout" method="POST">
             @csrf
@@ -198,14 +108,16 @@
                                             <div class="row">
                                                 <div class="col-4">
                                                     <a href="#"><img width="64" height="64"
-                                                            src="{{ asset($keranjang->produk->image[0]->gambar_produk) }}"
+                                                            src="{{ asset("images/gambar_produk/" . $keranjang->produk->image[0]->gambar_produk) }}"
                                                             alt="{{ $keranjang->produk->nama_produk }}"></a>
                                                 </div>
                                                 <div class="col mt-2 mx-1">
                                                     <div class="cart-product-name">{{ $keranjang->produk->nama_produk }}
                                                     </div>
                                                     @php
-                                                        $diskon = ($keranjang->produk->diskon / 100) * $keranjang->produk->harga;
+                                                        $diskon =
+                                                            ($keranjang->produk->diskon / 100) *
+                                                            $keranjang->produk->harga;
                                                         $harga = $keranjang->produk->harga - $diskon;
                                                     @endphp
                                                     <h5>Rp. {{ number_format($harga, 0, ',', '.') }}</h5>
@@ -332,7 +244,7 @@
                                             {{ number_format($total_harga, 0, ',', '.') }}</span>
                                     </td>
                                 </tr>
-                                <tr class="cart_item">
+                                {{-- <tr class="cart_item">
                                     <td class="border-top-0 cart-product-name">
                                         <strong>Metode Pembayaran</strong>
                                     </td>
@@ -348,7 +260,7 @@
                                             </select>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             </tbody>
                         </table>
                     </div>
@@ -360,9 +272,6 @@
     </div>
 
     {{-- EndCanvas --}}
-
-    {{-- <a class="btn yoww">asdas</a> --}}
-
 
     <script>
         $('.select').click(function() {
