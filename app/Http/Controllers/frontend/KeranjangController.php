@@ -65,7 +65,7 @@ class KeranjangController extends Controller
 
         }
         $keranjangs->save();
-        return back()->with('berhasil', 'Data has been added');
+        return back()->with('berhasil', 'Produk berhasil ditambahkan ke keranjang');
 
     }
 

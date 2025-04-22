@@ -25,6 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('metodePembayaran_id');
             $table->foreign('metodePembayaran_id')->references('id')->on('metode_pembayarans')->onDelete('cascade');
             $table->integer('total_harga')->default(0);
+            // $table->string('status')->default('Belum Bayar');
             $table->timestamps();
         });
     }

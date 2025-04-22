@@ -28,5 +28,6 @@
         @include('user.layouts.components.footer')
     </div>
     @include('user.layouts.components.bottom')
+    @stack("script")
 </body>
 </html>

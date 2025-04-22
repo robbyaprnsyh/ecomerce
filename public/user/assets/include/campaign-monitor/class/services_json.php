@@ -134,7 +134,7 @@ class Services_JSON
         $this->use = $use;
     }
 
-   /**
+    /**
     * convert a string from one UTF-16 char to one UTF-8 char
     *
     * Normally should be handled by mb_convert_encoding, but

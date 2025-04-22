@@ -93,7 +93,7 @@
                         <table class="table cart mb-5">
                             <thead>
                                 <tr>
-                                    <th class=" cart-product-thumbnail">Produk</th>
+                                    <th class=" cart-product-thumbnail"> </th>
                                     <th class="cart-product-price">Ukuran</th>
                                     <th class="cart-product-quantity">Jumlah</th>
                                     <th class="cart-product-subtotal">Total</th>
@@ -108,7 +108,7 @@
                                             <div class="row">
                                                 <div class="col-4">
                                                     <a href="#"><img width="64" height="64"
-                                                            src="{{ asset("images/gambar_produk/" . $keranjang->produk->image[0]->gambar_produk) }}"
+                                                            src="{{ asset('images/gambar_produk/' . $keranjang->produk->image[0]->gambar_produk) }}"
                                                             alt="{{ $keranjang->produk->nama_produk }}"></a>
                                                 </div>
                                                 <div class="col mt-2 mx-1">
@@ -245,7 +245,7 @@
                                     </td>
                                 </tr>
                                 {{-- <tr class="cart_item">
-                                    <td class="border-top-0 cart-product-name">
+                                    <td class="border-top-0 cart-product-name"> 
                                         <strong>Metode Pembayaran</strong>
                                     </td>
                                     <td class="border-top-0 cart-product-name">
@@ -264,8 +264,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <a onclick="event.preventDefault(); document.getElementById('checkout').submit();"
-                        class="button button-3d float-end">checkout</a>
+                    {{-- <a onclick="event.preventDefault(); document.getElementById('checkout').submit();"
+                        class="button button-3d float-end">checkout</a> --}}
+                    <button type="submit" class="button button-3d float-end">Checkout</button>
                 </div>
             </div>
         </form>

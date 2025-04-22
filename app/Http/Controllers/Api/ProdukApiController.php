@@ -14,11 +14,12 @@ use Illuminate\Http\Response;
 
 class ProdukApiController extends Controller
 {
-    public function index()
-    {
-        $produks = Produk::with('kategori', 'subKategori', 'image')->latest()->get();
-        return response()->json($produks);
-    }
+public function index()
+{
+    $produks = Produk::with('kategori', 'subKategori', 'image')->latest()->get();
+    return response()->json($produks);
+}
+
 
     public function store(Request $request)
     {

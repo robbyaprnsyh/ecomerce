@@ -7,6 +7,7 @@ use App\Http\Controllers\API\KategoriApiController;
 use App\Http\Controllers\Api\ProdukApiController;
 use App\Http\Controllers\Api\SubKategoriApiController;
 use App\Http\Controllers\Api\UserApiController;
+use App\Http\Controllers\MidtransController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

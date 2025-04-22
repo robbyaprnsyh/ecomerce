@@ -29,7 +29,7 @@
                                     <input id="allCheck" class="checkbox-style" name="allCheck" type="checkbox">
                                     <label for="allCheck" class="checkbox-style-3-label checkbox-small"></label>
                                 </th>
-                                <th class=" cart-product-thumbnail">Product</th>
+                                <th class=" cart-product-thumbnail">Produk</th>
                                 <th class="cart-product-price">Ukuran</th>
                                 <th class="cart-product-quantity">Jumlah</th>
                                 <th class="cart-product-subtotal">Total</th>
@@ -128,7 +128,7 @@
                 <div class="col-lg-4">
                     <h4>Total Keranjang</h4>
 
-                    <div class="col-lg-auto ps-lg-0 mb-3">
+                    {{-- <div class="col-lg-auto ps-lg-0 mb-3">
                         <div class="row">
                             <div class="col-md-8 m-0">
                                 <input id="kode_voucher" class="sm-form-control text-center text-md-start" readonly
@@ -192,7 +192,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="table-responsive">
                         <table class="table cart cart-totals">
                             <tbody>

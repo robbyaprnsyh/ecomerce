@@ -227,7 +227,7 @@
                                                                 <div class="comment-author vcard">
                                                                     <span class="comment-avatar clearfix">
                                                                         <img alt='Image'
-                                                                            src="{{ asset($review_produk->user->profile) }}"
+                                                                            src="{{ asset("images/users/" . $review_produk->user->profile) }}"
                                                                             height='60' width='60' /></span>
                                                                 </div>
                                                             </div>
@@ -285,7 +285,7 @@
                                                                 <div class="comment-author vcard">
                                                                     <span class="comment-avatar clearfix">
                                                                         <img alt='Image'
-                                                                            src="{{ asset($review_produk->user->profile) }}"
+                                                                            src="{{ asset("images/users/" . $review_produk->user->profile) }}"
                                                                             height='60' width='60' /></span>
                                                                 </div>
                                                             </div>
@@ -340,7 +340,7 @@
                                                                 <div class="comment-author vcard">
                                                                     <span class="comment-avatar clearfix">
                                                                         <img alt='Image'
-                                                                            src="{{ asset($review_produk->user->profile) }}"
+                                                                            src="{{ asset("images/users/" . $review_produk->user->profile) }}"
                                                                             height='60' width='60' /></span>
                                                                 </div>
                                                             </div>
@@ -397,7 +397,7 @@
                                                                 <div class="comment-author vcard">
                                                                     <span class="comment-avatar clearfix">
                                                                         <img alt='Image'
-                                                                            src="{{ asset($review_produk->user->profile) }}"
+                                                                            src="{{ asset("images/users/" . $review_produk->user->profile) }}"
                                                                             height='60' width='60' /></span>
                                                                 </div>
                                                             </div>
@@ -454,7 +454,7 @@
                                                                 <div class="comment-author vcard">
                                                                     <span class="comment-avatar clearfix">
                                                                         <img alt='Image'
-                                                                            src="{{ asset($review_produk->user->profile) }}"
+                                                                            src="{{ asset("images/users/" . $review_produk->user->profile) }}"
                                                                             height='60' width='60' /></span>
                                                                 </div>
                                                             </div>
@@ -511,7 +511,7 @@
                                                                 <div class="comment-author vcard">
                                                                     <span class="comment-avatar clearfix">
                                                                         <img alt='Image'
-                                                                            src="{{ asset($review_produk->user->profile) }}"
+                                                                            src="{{ asset("images/users/" . $review_produk->user->profile) }}"
                                                                             height='60' width='60' /></span>
                                                                 </div>
                                                             </div>

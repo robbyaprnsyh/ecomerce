@@ -14,7 +14,6 @@ use App\Models\Voucher;
 use App\Models\VoucherUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Midtrans\Snap;
 
 class TransaksiController extends Controller
 {
@@ -59,32 +58,32 @@ class TransaksiController extends Controller
     {
         //validasi
         $validated = $request->validate([
-            'user_id' => 'required',
+            'user_id'             => 'required',
             'metodePembayaran_id' => 'required',
-            'alamat_id' => 'required',
+            'alamat_id'           => 'required',
         ]);
 
-        $transaksis = new Transaksi();
+        $transaksis      = new Transaksi();
         $kode_transaksis = DB::table('transaksis')->select(DB::raw('MAX(RIGHT(kode_transaksi,3)) as kode'));
         if ($kode_transaksis->count() > 0) {
             foreach ($kode_transaksis->get() as $kode_transaksi) {
-                $x = ((int) $kode_transaksi->kode) + 1;
+                $x    = ((int) $kode_transaksi->kode) + 1;
                 $kode = sprintf('%03s', $x);
             }
         } else {
             $kode = '001';
         }
-        $transaksis->kode_transaksi = 'SKO-' . date('dmy') . $kode;
-        $transaksis->user_id = $request->user_id;
-        $transaksis->alamat_id = $request->alamat_id;
-        $transaksis->voucher_id = $request->voucher_id;
+        $transaksis->kode_transaksi      = 'SKO-' . date('dmy') . $kode;
+        $transaksis->user_id             = $request->user_id;
+        $transaksis->alamat_id           = $request->alamat_id;
+        $transaksis->voucher_id          = $request->voucher_id;
         $transaksis->metodePembayaran_id = $request->metodePembayaran_id;
         $transaksis->save();
 
         foreach ($request->keranjang_id as $keranjang) {
-            $detailTransaksi = new DetailTransaksi();
+            $detailTransaksi               = new DetailTransaksi();
             $detailTransaksi->transaksi_id = $transaksis->id;
-            $detailTransaksi->user_id = $transaksis->user_id;
+            $detailTransaksi->user_id      = $transaksis->user_id;
             $detailTransaksi->keranjang_id = $keranjang;
             $detailTransaksi->save();
 
@@ -102,11 +101,11 @@ class TransaksiController extends Controller
                 }
                 $produks->save();
 
-                $riwayatProduks = new RiwayatProduk();
+                $riwayatProduks            = new RiwayatProduk();
                 $riwayatProduks->produk_id = $produks->id;
-                $riwayatProduks->type = 'keluar';
-                $riwayatProduks->qty = $keranjang->jumlah;
-                $riwayatProduks->note = 'Barang terjual';
+                $riwayatProduks->type      = 'keluar';
+                $riwayatProduks->qty       = $keranjang->jumlah;
+                $riwayatProduks->note      = 'Barang terjual';
                 $riwayatProduks->save();
 
             }
@@ -125,7 +124,7 @@ class TransaksiController extends Controller
 
         // saldo
         $metodePembayarans = MetodePembayaran::where('id', $transaksis->metodePembayaran_id)->first();
-        $users = User::findOrFail($transaksis->user_id);
+        $users             = User::findOrFail($transaksis->user_id);
         if ($metodePembayarans->metodePembayaran == 'SUKO WALLET') {
             if ($users->saldo > $total_bayar) {
                 $users->saldo -= $total_bayar;
